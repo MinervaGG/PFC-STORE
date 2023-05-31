@@ -1,24 +1,56 @@
 <div class="container">
     <h2>Login</h2>
-    <form>
+    <form #itemForm="ngForm" name="itemForm">
         <div class="mb-3">
-            <label for="usernick">Nick de usuario</label>
-            <input type="text" class="from-control" id="usernick" placeholder="Usuario">
+            <label for="nick">Nick de usuario</label>
+            <input type="text" [(ngModel)]="userNick" class="from-control" name="nick" id="nick" placeholder="Usuario" #nick="ngModel" required minlength="6">
         </div>
+        <!-- Validacion userNick -->
+        <div *ngIf="(nick.dirty && nick.errors)">
+            <small class="form-text text-danger" *ngIf="nick.errors['required']">
+                Este campo es requerido
+            </small>  
+            <small class="form-text text-danger" *ngIf="nick.errors['minlength']">
+                Este campo tiene que tener una longitud minima de 6 caracteres 
+            </small> 
+        </div>  
 
         <div class="mb-3">
             <label for="password">Contraseña</label>
-            <input type="password" class="from-control" id="password" placeholder="Contraseña">
+            <input type="password" [(ngModel)]="userPassword" name="password" class="from-control" id="password" placeholder="Contraseña" #password="ngModel" required minlength="6">
         </div>
+        <!-- Validacion password -->
+        <div *ngIf="(password.dirty && password.errors)">
+            <small class="form-text text-danger" *ngIf="password.errors['required']">
+                Este campo es requerido
+            </small>
+            <small class="form-text text-danger" *ngIf="password.errors['minlength']">
+                Este campo tiene que tener una longitud minima de 6 caracteres 
+            </small>        
+        </div>  
 
         <div class="row justify-content-between">
             <div class="col-4">
-                <button class="btn btn-primary">Registrar</button>
-                
+                <a class="btn btn-primary" routerLink="/register">Registrar</a>                
             </div>
             <div class="col-4">
-                <button class="btn btn-primary">Login</button>
+                <button class="btn btn-primary" (click)="checkIfUserExist()" [disabled]="itemForm.invalid">Login</button>
             </div>
           </div>      
     </form>
+</div>
+
+
+
+
+
+
+
+
+<div *ngIf="isError" class="alert alert-danger" role="alert">
+    {{alertMessage}}
+</div>
+
+<div *ngIf="isCorrect" class="alert alert-success" role="alert">
+    {{alertMessage}}
 </div>

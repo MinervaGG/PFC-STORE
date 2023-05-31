@@ -17,8 +17,9 @@ const routes: Routes = [
   {path: 'items/:itemId', component: ItemFormComponent},
   {path: 'items/reactive/:itemId', component: ItemReactiveFormComponent},
   {path: 'categories/:categoryId', component: CategoryFormComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'register', component:RegisterComponent}
+  {path: 'register', component:RegisterComponent},
+  {path: 'login', component:LoginComponent}
+  
 
 ];
 
