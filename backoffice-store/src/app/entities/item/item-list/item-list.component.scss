@@ -1,0 +1,70 @@
+.imgItem {
+    width: 80px;
+}
+
+table{
+    border: 1px solid black;
+    margin: 0 auto;
+
+    thead{
+        background-color: black;
+        color: white;
+    }
+
+    tr:nth-child(2n){
+        background-color: gainsboro;
+    }
+}
+
+.botoneraPaginacion{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+
+    span{
+    margin: 0 20px;
+    }
+}
+
+button{
+    margin-right: 10px;
+}
+
+.containerFiltros {
+    margin-top: 25px;
+    width: 85%;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+
+    form {
+        padding-top: 30px;
+
+        label {
+            display: block;
+        }
+
+        input[type=text],input[type=number] {
+            width: 100%;
+        }
+    }
+
+    #filterTitle {
+        font-size: 14pt;
+        background: black;
+        color: white;
+        width: 200px;
+        padding-left: 20px;
+        border-radius: 8px;
+        margin-top: -33px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #btnSearch {
+        margin-top: 20px;
+    }
+}

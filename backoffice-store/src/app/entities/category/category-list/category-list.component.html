@@ -1,0 +1,46 @@
+<h1>Lista de categorias</h1>
+
+<div id="buttonCreateContainer">
+  <button [routerLink]="['/categories', 'new']">Nueva categoria</button>
+</div>
+
+<table class="table" *ngIf="categories.length > 0">
+    <thead>
+        <th>Id</th>
+        <th>Imagen</th>
+        <th>Categoria</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories">
+            <td>{{category.id}}</td>
+            <td> <img class="imgCategory" [src]="'data:image/jpeg;base64,/9j/' + category.image"></td>
+            <td>{{category.name}}</td>
+            <td>
+                <a [routerLink]="['/categories', category.id, 'items']">
+                    <button id="btnNavToCategoryItems">Articulos</button>
+                </a>                
+                <button id="btnEditCategory" [routerLink]="['/categories', category.id]">Editar</button>
+                <button id="btnDeleteCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(category.id!)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmacion de borrado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Desea eliminar el registro borrado? Esta accion no puede deshacerse
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteItem()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
