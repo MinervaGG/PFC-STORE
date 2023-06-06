@@ -8,6 +8,7 @@ import { ItemReactiveFormComponent } from './entities/item/item-reactive-form/it
 import { CategoryFormComponent } from './entities/category/category-form/category-form.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'items/reactive/:itemId', component: ItemReactiveFormComponent},
   {path: 'categories/:categoryId', component: CategoryFormComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'login', component:LoginComponent}
+  {path: 'login', component:LoginComponent},
+  {path: 'profile/:userId', component: ProfileComponent}
   
 
 ];

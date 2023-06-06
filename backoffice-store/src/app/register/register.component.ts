@@ -3,31 +3,19 @@ import { User } from '../entities/user/model/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../entities/user/service/user.service';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit{
-/** 
-  userNick?: string;
-  userName?: string;
-  userSurname?: string;
-  userTelephone?: string;
-  userEmail?: string;
-  userPassword?: string;
-
-*/
   user?: User;
 
   isError?: boolean;
   alertMessage?: string;
   isCorrect: boolean = false;
 
-
   userForm?: FormGroup;
-
 
   constructor(private fb: FormBuilder,
               private userService: UserService){}
@@ -38,7 +26,7 @@ export class RegisterComponent implements OnInit{
 
   private buildForm(): void {
     this.userForm = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(4)]],
+      nick: ['', [Validators.required, Validators.minLength(6)]],
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
       telephone: ['', [Validators.required]],
@@ -63,7 +51,8 @@ export class RegisterComponent implements OnInit{
   private createFromForm(): User {
     return {
       ...this.user,
-      id: this.userForm?.get(['id'])!.value,
+      id: undefined,
+      nick: this.userForm?.get(['nick'])!.value,
       name: this.userForm?.get(['name'])!.value,
       surname: this.userForm?.get(['surname'])!.value,
       email: this.userForm?.get(['email'])!.value,
@@ -73,42 +62,28 @@ export class RegisterComponent implements OnInit{
   }
 
   public createUser(){
-    const user = this.createFromForm();
+    const user = this.createFromForm();    
     this.insertUser(user);
   }
 
-  private insertUser(userToCreate: User): void{
-    this.userService.insert(userToCreate).subscribe({
+  private insertUser(userToCreate: User){
+      this.userService.insert(userToCreate).subscribe({
       next: (userCreated) => {
-        console.log("Creado correctamente");
+        this.showAlert("Usuario " + userCreated.nick + " correctamente")
         console.log(userCreated);
-        this.showAlert("Creado correctamente")
       },
-      error: (err) => {this.handleError(err);}
+      error: (err) => {this.handleError("Ya existe un usuario con ese nick");}
     })
-  }
-/**
-
-  public createUser(){
-    if(!this.userExist()){
-      this.user = new User(this.userNick!, this.userName!, this.userSurname!, this.userEmail!, this.userPassword!, this.userTelephone);
-      console.log(this.user);
-
-    }    
-  }
-
-  public userExist(): boolean{
-    this.handleError("Ese usuario ya existe");
-    return false;
-
-  }
-  **/
+  }  
+    
   private handleError(err: any): void {
+    this.isCorrect = false;
     this.isError = true;
     this.alertMessage = err;
   }
 
   private showAlert(message: string): void {
+    this.isError = false;
     this.alertMessage = message;
     this.isCorrect = true;
   }

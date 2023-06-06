@@ -34,23 +34,12 @@
                 <a class="btn btn-primary" routerLink="/register">Registrar</a>                
             </div>
             <div class="col-4">
-                <button class="btn btn-primary" (click)="checkIfUserExist()" [disabled]="itemForm.invalid">Login</button>
+                <button class="btn btn-primary" (click)="login()" [disabled]="itemForm.invalid">Login</button>
             </div>
           </div>      
     </form>
 </div>
 
-
-
-
-
-
-
-
 <div *ngIf="isError" class="alert alert-danger" role="alert">
-    {{alertMessage}}
-</div>
-
-<div *ngIf="isCorrect" class="alert alert-success" role="alert">
     {{alertMessage}}
 </div>

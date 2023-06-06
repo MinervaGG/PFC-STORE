@@ -1,5 +1,6 @@
 export class User{
-    id: string;
+    id: number | undefined;
+    nick: string;
     name: string;
     surname: string;
     email: string;
@@ -7,7 +8,8 @@ export class User{
     telephone?: string;
 
   constructor(
-    id: string, 
+    id: number | undefined, 
+    nick: string,
     name: string, 
     surname: string,    
     email: string,
@@ -15,6 +17,7 @@ export class User{
     telephone?: string
 ) {
     this.id = id
+    this.nick = nick
     this.name = name
     this.surname = surname
     this.email = email
