@@ -1,9 +1,6 @@
 package com.kreitek.store.infrastructure.persistence;
 
 import com.kreitek.store.domain.entity.Item;
-import com.kreitek.store.infrastructure.specs.ItemSpecification;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
