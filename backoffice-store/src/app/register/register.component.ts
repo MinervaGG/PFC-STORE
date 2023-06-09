@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../entities/user/model/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../entities/user/service/user.service';
+import { Item } from '../entities/item/model/item.model';
 
 @Component({
   selector: 'app-register',

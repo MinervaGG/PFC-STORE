@@ -50,11 +50,19 @@
                 <button id="btnEditCategory" [routerLink]="['/items', item.id]">Editar</button>
                 <button id="btnEditReactiveItem" [routerLink]="['/items','reactive',item.id]">Editar reactive</button>
                 <button id="btnDeleteCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(item.id!)">Eliminar</button>
+            <div *ngIf="userId != undefined">
+                <button id="btnAddFavorite" *ngIf="!item.favorite" (click)="addFavorite(item.id!)">Añadir favorito</button>
+                <button id="btnDeleteFavorite" *ngIf="item.favorite" (click)="deleteFavorite(item.id!)">Quitar favorito</button>
+            </div>
+                
             </td>
         </tr>
     </tbody>
 </table>
-
+<!-- 
+    <button id="btnAddFavorite" *ngIf="!isFavorite" (click)="addFavorite(item.id!)">Favorito</button>
+    <button id="btnDeleteFavorite" *ngIf="!isFavorite" (click)="deleteFavorite(item.id!)">Quitar Favorito</button>
+ -->
 <!-- Modal -->
 <div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
     <div class="modal-dialog">
@@ -78,4 +86,8 @@
     <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
     <span>Pagina {{page + 1}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
     <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button>
+</div>
+
+<div *ngIf="isCorrect" class="alert alert-success" role="alert">
+    {{alertMessage}}
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../service/item.service';
 import { Item } from '../model/item.model';
+import { UserService } from '../../user/service/user.service';
+import { UserLoginService } from '../../user/service/user-login.service';
 
 @Component({
   selector: 'app-item-list',
@@ -9,6 +11,7 @@ import { Item } from '../model/item.model';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit{
+
   categoryId?: number;
   title: string = "";
   items: Item[] = [];
@@ -27,8 +30,15 @@ export class ItemListComponent implements OnInit{
 
   itemIdToDelete?: number;
 
+  alertMessage?: string;
+  isCorrect: boolean = false;
+
+  userId?: string | null;
+
   constructor(private route: ActivatedRoute,
-              private itemService: ItemService){}
+              private itemService: ItemService,
+              private userService: UserService,
+              private userLoginService: UserLoginService){}
 
   ngOnInit(): void {
     if(this.route.snapshot.paramMap.get("categoryId")){
@@ -38,7 +48,13 @@ export class ItemListComponent implements OnInit{
       this.title = "Lista de articulos";      
     }
     this.getAllItems();
+
+    this.userId = this.userLoginService.getIdUser();
+    console.log("Favoritos: " + this.userId);
+
   }
+
+
 
   public nextPage(): void{
     this.page = this.page + 1;
@@ -108,13 +124,71 @@ export class ItemListComponent implements OnInit{
         this.last = data.last;
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
+        
+        this.items.forEach(element => {
+          this.setItemFavorite(element.id!);
+        });
+        
       },
       error: (err) => {this.handleError(err);}
     })
   }
 
-  private handleError(error: any): void{
-    // lo que queramos
+  addFavorite(itemId: number) {
+    // primera linea se puede quitar si ya se accede solo cuadno el usuario esta registrado
+    if (this.userLoginService.getIdUser() != null){
+      var userId = this.userLoginService.getIdUser();
+      this.userService.addItemToFavorite(userId!, itemId).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.showAlert("Añadido a favotitos");
+          this.setItemFavorite(itemId);
+        },
+        error: (err) => {this.handleError(err);}
+      })
+    }
+  }
+    
+  deleteFavorite(itemId: number) {
+    if (this.userLoginService.getIdUser() != null){
+      var userId = this.userLoginService.getIdUser();
+      this.userService.removeItemFromFavorite(userId!, itemId).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.showAlert("Eliminado correctamente");
+          this.setItemFavorite(itemId);
+        },
+        error: (err: any) => {this.handleError(err);}
+      })
+    }
   }
 
+  setItemFavorite(itemId: number): void {
+    if (this.userId == undefined)
+    {
+      return;
+    }
+
+    this.userService.isItemFavorite(this.userId!, itemId).subscribe({
+      next: (data: boolean) => {
+        this.items.forEach(element => {
+          if (element.id == itemId){
+            element.favorite = data;
+          }
+        });
+      },
+      error: (err: any) => {
+        this.handleError(err);
+      }
+    })
+  }
+
+  private handleError(error: any): void{
+    console.log(error);
+  }
+
+  private showAlert(message: string): void {
+    this.alertMessage = message;
+    this.isCorrect = true;
+  }
 }

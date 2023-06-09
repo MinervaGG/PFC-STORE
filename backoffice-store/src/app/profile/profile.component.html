@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<h2>{{userNick}} favorites</h2>
+
+<table class="table" > 
+    <thead>
+        <th>Id</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{item.id}}</td>
+            <td> <img class="imgItem" [src]="'data:image/jpeg;base64,/9j/' + item.image"></td>
+            <td> 
+                <button [routerLink]="['/items', item.id]">Ver en detalle</button>
+                <button id="btnDeleteFavorite" (click)="deleteFavorite(item.id!)">Quitar Favorito</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

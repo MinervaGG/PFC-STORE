@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserLoginService } from 'src/app/entities/user/service/user-login.service';
@@ -8,7 +8,7 @@ import { UserLoginService } from 'src/app/entities/user/service/user-login.servi
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnDestroy{
+export class NavbarComponent implements OnDestroy, OnInit{
 
   userNick: string | null = null;
   userId: string | null = null;
@@ -18,17 +18,22 @@ export class NavbarComponent implements OnDestroy{
     this.userSubscription = this.userLoginService.userChange.subscribe((nick => {
        this.userNick = nick;
        this.userId = this.userLoginService.getIdUser();
+       console.log("Navbar: " + this.userId);
       }));
   }
 
   logOut(){
     this.userLoginService.removeUser()
-    console.log(localStorage.getItem("userID"));
     this.route.navigateByUrl('');
-
   }  
-  
+
+  ngOnInit(): void {
+    this.userNick = this.userLoginService.getNickUser();
+    this.userId = this.userLoginService.getIdUser();
+    console.log("Navbar Init: " + this.userId);
+  }
+ 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
-  }
+  }  
 }
