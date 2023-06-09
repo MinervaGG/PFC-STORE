@@ -1,6 +1,7 @@
 package com.kreitek.store.domain.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -21,18 +22,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_item",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn (name = "item_id")
+    )
+    Set<Item> favorites;
 
-    public User(Long id, String nick, String name, String surname, String telephone, String email, String password) {
-        this.id = id;
-        this.nick = nick;
-        this.name = name;
-        this.surname = surname;
-        this.telephone = telephone;
-        this.email = email;
-        this.password = password;
-    }
 
     public Long getId() {
         return id;
@@ -88,5 +85,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Item> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Item> favorites) {
+        this.favorites = favorites;
     }
 }

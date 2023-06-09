@@ -18,13 +18,13 @@
             </div>
             <!-- Authentication-->
             <div class="navbar-nav ms-auto"> 
-                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="userNick">
+                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="userId != undefined">
                     <a class="nav-link " aria-current="page" [routerLink]="['/profile', userId]">Hola {{userNick}}</a>
                  </li>
-                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="!userNick">
+                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="userId == undefined">
                    <a class="nav-link " aria-current="page" [routerLink]="['login']">Identifícate</a>
                 </li>
-                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="userNick">
+                <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="userId != undefined">
                     <a class="nav-link " aria-current="page" (click)="logOut()">Cerrar</a>
                  </li>
             </div>            
