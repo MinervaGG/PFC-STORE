@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit{
     itemsFavoritos.subscribe({
       next: (data: any) => {
         this.items = data;
-        console.log(data);
       },
       error: (err) => {
         console.log(err);}
@@ -42,11 +41,9 @@ export class ProfileComponent implements OnInit{
     if (this.userLoginService.getIdUser() != null){
       var userId = this.userLoginService.getIdUser();
       this.userService.removeItemFromFavorite(userId!, itemId).subscribe({
-        next: (data: any) => {
-          console.log(data);
+        next: () => {
           this.showAlert("Eliminado correctamente");
           this.setItemFavorites();
-
         },
         error: (err: any) => {console.log(err);}
       })
@@ -57,5 +54,4 @@ export class ProfileComponent implements OnInit{
     this.alertMessage = message;
     this.isCorrect = true;
   }
-
 }

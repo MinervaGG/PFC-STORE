@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit{
 
   private handleError(err: any): void {
     this.isError = true;
-    this.alertMessage = err;
-    
+    this.alertMessage = err;    
   } 
 }

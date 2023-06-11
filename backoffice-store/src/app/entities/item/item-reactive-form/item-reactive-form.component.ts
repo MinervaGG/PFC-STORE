@@ -147,8 +147,6 @@ export class ItemReactiveFormComponent implements OnInit{
     }
   }
 
-
-
   private readFileAsString(file: File){
     return new Promise<string>(function(resolve, reject){
       let reader: FileReader = new FileReader();
@@ -162,7 +160,6 @@ export class ItemReactiveFormComponent implements OnInit{
   private insertItem(itemToSave: Item): void{
     this.itemService.insert(itemToSave).subscribe({
       next: (itemInserted) => {
-        console.log("Insertado correctamente");
         console.log(itemInserted);
         this.showAlert("Insertado correctamente")
       },
@@ -173,7 +170,6 @@ export class ItemReactiveFormComponent implements OnInit{
   private updateItem(itemToSave: Item): void {
     this.itemService.insert(itemToSave).subscribe({
       next: (itemUpdated) => {
-        console.log("Modificado correctamente");
         console.log(itemUpdated);
         this.showAlert("Modificado correctamente")
       },

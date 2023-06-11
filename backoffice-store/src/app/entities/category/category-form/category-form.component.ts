@@ -107,7 +107,6 @@ export class CategoryFormComponent {
   private insertCategory(): void{
     this.categoryService.insert(this.category!).subscribe({
       next: (categoryInserted) => {
-        console.log("Insertado correctamente");
         console.log(categoryInserted);
         this.showAlert("Insertado correctamente")
       },
@@ -118,7 +117,6 @@ export class CategoryFormComponent {
   private updateCategory(): void {
     this.categoryService.update(this.category!).subscribe({
       next: (categoryUpdated) => {
-        console.log("Modificado correctamente");
         console.log(categoryUpdated);
         this.showAlert("Modificado correctamente")
       },

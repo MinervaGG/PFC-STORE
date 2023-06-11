@@ -2,7 +2,6 @@ package com.kreitek.store.domain.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "categories")

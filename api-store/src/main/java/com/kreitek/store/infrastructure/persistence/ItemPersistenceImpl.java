@@ -51,6 +51,4 @@ public class ItemPersistenceImpl implements ItemPersistence {
     public void deleteItem(Long itemId) {
         this.itemRepository.deleteById(itemId);
     }
-
-
 }

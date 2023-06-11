@@ -4,6 +4,8 @@ import { ItemService } from '../service/item.service';
 import { Item } from '../model/item.model';
 import { UserService } from '../../user/service/user.service';
 import { UserLoginService } from '../../user/service/user-login.service';
+import { CartKey } from 'src/app/cart/models/CartKey.model';
+import { ItemToCart } from 'src/app/cart/models/ItemToCart.model';
 
 @Component({
   selector: 'app-item-list',
@@ -50,11 +52,7 @@ export class ItemListComponent implements OnInit{
     this.getAllItems();
 
     this.userId = this.userLoginService.getIdUser();
-    console.log("Favoritos: " + this.userId);
-
   }
-
-
 
   public nextPage(): void{
     this.page = this.page + 1;
@@ -127,20 +125,17 @@ export class ItemListComponent implements OnInit{
         
         this.items.forEach(element => {
           this.setItemFavorite(element.id!);
-        });
-        
+        });        
       },
       error: (err) => {this.handleError(err);}
     })
   }
 
   addFavorite(itemId: number) {
-    // primera linea se puede quitar si ya se accede solo cuadno el usuario esta registrado
     if (this.userLoginService.getIdUser() != null){
       var userId = this.userLoginService.getIdUser();
       this.userService.addItemToFavorite(userId!, itemId).subscribe({
-        next: (data: any) => {
-          console.log(data);
+        next: () => {
           this.showAlert("Añadido a favotitos");
           this.setItemFavorite(itemId);
         },
@@ -153,9 +148,7 @@ export class ItemListComponent implements OnInit{
     if (this.userLoginService.getIdUser() != null){
       var userId = this.userLoginService.getIdUser();
       this.userService.removeItemFromFavorite(userId!, itemId).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.showAlert("Eliminado correctamente");
+        next: () => {
           this.setItemFavorite(itemId);
         },
         error: (err: any) => {this.handleError(err);}
@@ -168,7 +161,6 @@ export class ItemListComponent implements OnInit{
     {
       return;
     }
-
     this.userService.isItemFavorite(this.userId!, itemId).subscribe({
       next: (data: boolean) => {
         this.items.forEach(element => {
@@ -181,6 +173,21 @@ export class ItemListComponent implements OnInit{
         this.handleError(err);
       }
     })
+  }
+
+  addItemToCart(itemId: number) {
+    if (this.userLoginService.getIdUser() != null){
+      var userId = this.userLoginService.getIdUser();
+      var cartKey : CartKey = new CartKey(userId!, itemId);
+      var item : ItemToCart = new ItemToCart (cartKey, 1);
+
+      this.userService.addItemToCart(userId!, item).subscribe({
+        next: () => {
+          this.showAlert("Añadido al carrito");
+        },
+        error: (err) => {this.handleError(err);}
+      })
+    }
   }
 
   private handleError(error: any): void{

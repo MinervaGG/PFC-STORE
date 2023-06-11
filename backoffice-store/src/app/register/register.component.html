@@ -1,7 +1,6 @@
 <div class="container">
     <h2>Regístrate</h2>
-    <form *ngIf="userForm" [formGroup]="userForm!" novalidate autocomplete="off">
-        
+    <form *ngIf="userForm" [formGroup]="userForm!" novalidate autocomplete="off">        
         <div class="form-group">
             <label for="nick">Nick</label>
             <input type="text" class="form-control" id="nick" formControlName="nick" maxlength="20">
@@ -13,46 +12,38 @@
             <small class="form-text text-danger" *ngIf="userForm.get('nick')!.errors!['minlength']">
                 Este campo tiene que tener una longitud minima de 4 caracteres
             </small>        
-        </div>   
-    
+        </div>       
         <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" class="form-control" id="name" formControlName="name" maxlength="40">
-        </div>
-        
+        </div>        
         <div *ngIf="(userForm.get('name')!.dirty && userForm.get('name')!.errors)">
             <small class="form-text text-danger" *ngIf="userForm.get('name')!.errors!['required']">
                 Este campo es obligatorio
             </small>      
         </div>    
-
         <div class="form-group">
             <label for="surname">Apellido</label>
             <input type="text" class="form-control" id="surname" formControlName="surname" maxlength="100">
-        </div>
-        
+        </div>        
         <div *ngIf="(userForm.get('surname')!.dirty && userForm.get('surname')!.errors)">
             <small class="form-text text-danger" *ngIf="userForm.get('surname')!.errors!['required']">
                 Este campo es obligatorio
             </small>      
         </div>   
-
         <div class="form-group">
             <label for="telephone">Telefono</label>
             <input type="text" class="form-control" id="telephone" formControlName="telephone" maxlength="9">
-        </div>
-        
+        </div>        
         <div *ngIf="(userForm.get('telephone')!.dirty && userForm.get('telephone')!.errors)">
             <small class="form-text text-danger" *ngIf="userForm.get('telephone')!.errors!['required']">
                 Este campo es obligatorio
             </small>      
         </div>  
-
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" formControlName="email" maxlength="100">
-        </div>
-        
+        </div>        
         <div *ngIf="(userForm.get('email')!.dirty && userForm.get('email')!.errors)">
             <small class="form-text text-danger" *ngIf="userForm.get('email')!.errors!['required']">
                 Este campo es obligatorio
@@ -61,7 +52,6 @@
                 El email debe tener un formato correcto
             </small>     
         </div>  
-
         <div class="form-group">
             <label for="password">Contraseña</label>
             <input type="password" class="form-control" id="password" formControlName="password" maxlength="20">
@@ -74,7 +64,6 @@
                 Este campo tiene que tener una longitud minima de 6 caracteres
             </small>         
         </div>   
-
         <div class="form-group">
             <label for="repeatPassword">Repetir contraseña</label>
             <input type="password" class="form-control" id="repeatPassword" formControlName="repeatPassword" maxlength="20">
@@ -87,17 +76,14 @@
                 La contraseña no coincide
             </small>        
         </div>  
-
         <div class="buttonsForm row justify-content-between">
             <div class="col-4">
-                <a class="btn btn-primary" routerLink="/login">Login</a>
-                
+                <a class="btn btn-primary" routerLink="/login">Login</a>                
             </div>
             <div class="col-4">
                 <button class="btn btn-primary" (click)="createUser()" [disabled]="userForm.invalid">Crear Usuario</button>
             </div>
-          </div>      
-
+          </div> 
     </form>
 </div>
 

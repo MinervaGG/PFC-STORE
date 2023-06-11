@@ -566,3 +566,6 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "USERS_ID" not found; SQL statem
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
 	at com.kreitek.store.StoreApplication.main(StoreApplication.java:10)
+2023-06-11 01:23:55 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE [*]IF EXISTSUSER_ITEM_CART"; expected "identifier"; SQL statement:
+DROP TABLE IF EXISTSUSER_ITEM_CART [42001-214]

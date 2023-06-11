@@ -57,6 +57,4 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItem(Long itemId) {
         this.persistence.deleteItem(itemId);
     }
-
-
 }

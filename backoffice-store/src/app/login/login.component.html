@@ -5,7 +5,7 @@
             <label for="nick">Nick de usuario</label>
             <input type="text" [(ngModel)]="userNick" class="from-control" name="nick" id="nick" placeholder="Usuario" #nick="ngModel" required minlength="6">
         </div>
-        <!-- Validacion userNick -->
+        <!-- Validation userNick -->
         <div *ngIf="(nick.dirty && nick.errors)">
             <small class="form-text text-danger" *ngIf="nick.errors['required']">
                 Este campo es requerido
@@ -14,12 +14,11 @@
                 Este campo tiene que tener una longitud minima de 6 caracteres 
             </small> 
         </div>  
-
         <div class="mb-3">
             <label for="password">Contraseña</label>
             <input type="password" [(ngModel)]="userPassword" name="password" class="from-control" id="password" placeholder="Contraseña" #password="ngModel" required minlength="6">
         </div>
-        <!-- Validacion password -->
+        <!-- Validation password -->
         <div *ngIf="(password.dirty && password.errors)">
             <small class="form-text text-danger" *ngIf="password.errors['required']">
                 Este campo es requerido
@@ -28,7 +27,6 @@
                 Este campo tiene que tener una longitud minima de 6 caracteres 
             </small>        
         </div>  
-
         <div class="row justify-content-between">
             <div class="col-4">
                 <a class="btn btn-primary" routerLink="/register">Registrar</a>                

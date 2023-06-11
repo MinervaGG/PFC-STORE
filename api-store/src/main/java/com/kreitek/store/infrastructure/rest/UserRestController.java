@@ -2,6 +2,7 @@ package com.kreitek.store.infrastructure.rest;
 
 import com.kreitek.store.application.dto.ItemDTO;
 import com.kreitek.store.application.dto.UserDTO;
+import com.kreitek.store.application.dto.UserItemCartDTO;
 import com.kreitek.store.application.service.UserService;
 import com.kreitek.store.infrastructure.specs.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RestController
 public class UserRestController {
     private final UserService userService;
+
     @Autowired
     public UserRestController(UserService userService) {
         this.userService = userService;
@@ -62,31 +64,6 @@ public class UserRestController {
         }
     }
 
-/**
-    @CrossOrigin
-    @PutMapping(value = "/users/{userId}/favorites", produces = "application/text", consumes = "application/json")
-    public ResponseEntity<List<ItemDTO>> addItemToFavorite(@PathVariable Long userId, @RequestBody ItemDTO itemDTO){
-        List<ItemDTO> itemsDto = this.userService.addItemToFavorite(userId, itemDTO);
-        return new ResponseEntity<>(itemsDto, HttpStatus.OK);
-    }
-
-    @CrossOrigin
-    @PutMapping(value = "/users/{userId}/favorites", produces = "application/text", consumes = "application/json")
-    public boolean addItemToFavorite(@PathVariable Long userId, @RequestBody ItemDTO itemDTO){
-        return this.userService.addItemToFavorite(userId, itemDTO);
-
-    }
-
-    @CrossOrigin
-    @GetMapping(value = "/users/{userId}/favorites", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<List<ItemDTO>> getUserFavorites(@PathVariable Long userId){
-        List<ItemDTO> itemsDto = this.userService.getUserFavorites(userId);
-        if (itemsDto.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(itemsDto, HttpStatus.OK);
-    }*/
-
     @CrossOrigin
     @PutMapping(value = "/users/{userId}/favorites/{itemId}", produces = "application/json", consumes = "application/json")
     ResponseEntity<?> addItemToFavorite(@PathVariable Long userId, @PathVariable Long itemId) {
@@ -125,5 +102,38 @@ public class UserRestController {
             }
         }
         return new ResponseEntity<>(false, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/users/{userId}/cart", produces = "application/json", consumes = "application/json")
+    ResponseEntity<List<UserItemCartDTO>> addItemToCart(@PathVariable Long userId, @RequestBody UserItemCartDTO userItemCartDTO) {
+        try {
+            this.userService.addItemToCart(userId, userItemCartDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/users/{userId}/cart", produces = "application/json")
+    ResponseEntity<List<UserItemCartDTO>> getUserCart(@PathVariable Long userId) {
+        try {
+            List<UserItemCartDTO> userItemCartDTOS = this.userService.getUserCart(userId);
+            return new ResponseEntity<>(userItemCartDTOS, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/users/{userId}/cart/{itemId}")
+    ResponseEntity<?> deleteItemFromCart(@PathVariable Long userId, @PathVariable Long itemId) {
+        try {
+            this.userService.deleteItemFromCart(userId, itemId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
