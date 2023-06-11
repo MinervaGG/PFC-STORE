@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../entities/user/model/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../entities/user/service/user.service';
-import { Item } from '../entities/item/model/item.model';
 
 @Component({
   selector: 'app-register',
@@ -11,11 +10,9 @@ import { Item } from '../entities/item/model/item.model';
 })
 export class RegisterComponent implements OnInit{
   user?: User;
-
   isError?: boolean;
   alertMessage?: string;
   isCorrect: boolean = false;
-
   userForm?: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -42,7 +39,6 @@ export class RegisterComponent implements OnInit{
   private passwordMatchValidator(form: FormGroup) {
     var password = form.get('password')!.value;
     var repeatPassword = form.get('repeatPassword')!.value;
-
     if (password !== repeatPassword)
     {
       form.get('repeatPassword')?.setErrors({passwordMismatch: true});
@@ -71,7 +67,6 @@ export class RegisterComponent implements OnInit{
       this.userService.insert(userToCreate).subscribe({
       next: (userCreated) => {
         this.showAlert("Usuario " + userCreated.nick + " correctamente")
-        console.log(userCreated);
       },
       error: (err) => {this.handleError("Ya existe un usuario con ese nick");}
     })

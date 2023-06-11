@@ -28,7 +28,6 @@ export class CategoryListComponent implements OnInit{
     console.log(error);
   }
 
-
   public prepareItemToDelete(categoryId: number): void{
     this.categoryIdToDelete = categoryId;
   }
@@ -42,7 +41,5 @@ export class CategoryListComponent implements OnInit{
       error: (err:any) => {this.handleError(err)}
       })
     }    
-  }
-
-  
+  }  
 }

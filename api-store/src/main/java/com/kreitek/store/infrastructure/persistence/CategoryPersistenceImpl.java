@@ -1,8 +1,6 @@
 package com.kreitek.store.infrastructure.persistence;
 
-import com.kreitek.store.application.mapper.CategoryMapper;
 import com.kreitek.store.domain.entity.Category;
-import com.kreitek.store.domain.entity.Item;
 import com.kreitek.store.domain.persistence.CategoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

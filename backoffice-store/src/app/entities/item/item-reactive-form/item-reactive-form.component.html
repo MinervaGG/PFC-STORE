@@ -1,28 +1,20 @@
 <h1>Ficha de articulo</h1>
 {{mode}} // {{itemId}}
 
-
-<form *ngIf="itemForm" [formGroup]="itemForm!" novalidate autocomplete="off">
-    
+<form *ngIf="itemForm" [formGroup]="itemForm!" novalidate autocomplete="off">    
     <div class="form-group">
         <label for="id">Id</label>
         <input type="number" class="form-control" id="price" formControlName="id">
-    </div>
-
-    
+    </div>    
     <div class="form-group">
         <label for="categoryId">Category</label>
         <p-autoComplete formControlName="category" name="category" [suggestions]="categories" (completeMethod)="getAllCategories($event)" field="name"
         [forceSelection]="true"></p-autoComplete>
-    </div>
-
-
-    
+    </div>    
     <div class="form-group">
         <label for="name">Nombre</label>
         <input type="text" class="form-control" id="name" formControlName="name">
-    </div>
-    
+    </div>    
     <div *ngIf="(itemForm.get('name')!.dirty && itemForm.get('name')!.errors)">
         <small class="form-text text-danger" *ngIf="itemForm.get('name')!.errors!['required']">
             Este campo es requerido
@@ -30,14 +22,12 @@
         <small class="form-text text-danger" *ngIf="itemForm.get('name')!.errors!['minlength']">
             Este campo tiene que tener una longitud minima de 3 caracteres
         </small>        
-    </div>    
-
+    </div> 
     <!-- Descripcion -->
     <div class="form-group">
         <label for="description">Descripcion</label>
         <input type="text" class="form-control" id="description" formControlName="description">
     </div>
-
     <!-- Precio -->
     <div class="form-group">
         <label for="price">Precio</label>
@@ -53,8 +43,6 @@
             El valor debe ser positivo
         </small>
     </div>
-
-
     <!-- Imagen -->
     <div class="form-group">
         <label for="image">Imagen</label>
@@ -62,17 +50,14 @@
         <img *ngIf="item!.image" [src]="'data:image/jpeg;base64,/9j/' + item!.image">
     </div>
 
-
     <div class="buttonsForm">
         <button (click)="saveItem()" [disabled]="itemForm.invalid">Guardar</button>
     </div>
-
 </form>
 
 <div *ngIf="isError" class="alert alert-danger" role="alert">
     {{alertMessage}}
 </div>
-
 <div *ngIf="isCorrect" class="alert alert-success" role="alert">
     {{alertMessage}}
 </div>

@@ -1,8 +1,10 @@
 package com.kreitek.store.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "items")
@@ -23,6 +25,10 @@ public class Item {
     @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore // Ignore field during serialization to avoid infinite recursion
+    private Set<UserItemCart> userItemsCart;
 
     public Item() {
     }
@@ -73,5 +79,13 @@ public class Item {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<UserItemCart> getUserItemsCart() {
+        return userItemsCart;
+    }
+
+    public void setUserItemsCart(Set<UserItemCart> userItemsCart) {
+        this.userItemsCart = userItemsCart;
     }
 }

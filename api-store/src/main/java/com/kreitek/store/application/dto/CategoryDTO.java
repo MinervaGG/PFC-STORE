@@ -1,16 +1,12 @@
 package com.kreitek.store.application.dto;
 
-import com.kreitek.store.domain.entity.Item;
-
 import java.io.Serializable;
-import java.util.List;
 
 public class CategoryDTO implements Serializable {
     private Long id;
     private String name;
     private String description;
     private byte[] image;
-
 
     public CategoryDTO() {
     }
@@ -46,5 +42,4 @@ public class CategoryDTO implements Serializable {
     public void setImage(byte[] image) {
         this.image = image;
     }
-
 }

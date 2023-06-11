@@ -18,7 +18,6 @@ export class NavbarComponent implements OnDestroy, OnInit{
     this.userSubscription = this.userLoginService.userChange.subscribe((nick => {
        this.userNick = nick;
        this.userId = this.userLoginService.getIdUser();
-       console.log("Navbar: " + this.userId);
       }));
   }
 
@@ -30,7 +29,6 @@ export class NavbarComponent implements OnDestroy, OnInit{
   ngOnInit(): void {
     this.userNick = this.userLoginService.getNickUser();
     this.userId = this.userLoginService.getIdUser();
-    console.log("Navbar Init: " + this.userId);
   }
  
   ngOnDestroy(): void {

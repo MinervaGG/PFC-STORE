@@ -54,6 +54,4 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = this.persistence.getCategoryByName(partialName);
         return mapper.toDto(categories);
     }
-
-
 }

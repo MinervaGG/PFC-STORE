@@ -120,7 +120,6 @@ export class ItemFormComponent implements OnInit{
   private insertItem(): void{
     this.itemService.insert(this.item!).subscribe({
       next: (itemInserted) => {
-        console.log("Insertado correctamente");
         console.log(itemInserted);
         this.showAlert("Insertado correctamente")
       },
@@ -131,7 +130,6 @@ export class ItemFormComponent implements OnInit{
   private updateItem(): void {
     this.itemService.insert(this.item!).subscribe({
       next: (itemUpdated) => {
-        console.log("Modificado correctamente");
         console.log(itemUpdated);
         this.showAlert("Modificado correctamente")
       },

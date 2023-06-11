@@ -1,7 +1,5 @@
 package com.kreitek.store.application.dto;
 
-import com.kreitek.store.domain.entity.Item;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,6 +13,8 @@ public class UserDTO implements Serializable {
     private String password;
 
     List<ItemDTO> favorites;
+
+    List<UserItemCartDTO> userItemsCart;
 
     public Long getId() {
         return id;
@@ -78,5 +78,13 @@ public class UserDTO implements Serializable {
 
     public void setFavorites(List<ItemDTO> favorites) {
         this.favorites = favorites;
+    }
+
+    public List<UserItemCartDTO> getUserItemsCart() {
+        return userItemsCart;
+    }
+
+    public void setUserItemsCart(List<UserItemCartDTO> userItemsCart) {
+        this.userItemsCart = userItemsCart;
     }
 }

@@ -6,10 +6,7 @@ export class Item{
     categoryName?: string;
     description?: string;
     image?: string;
-
     favorite?: boolean;
-
-
   constructor(
     id: number | undefined, 
     name: string, 
@@ -18,7 +15,6 @@ export class Item{
     categoryName?: string, 
     description?: string, 
     image?: string,
-
     favorite?: boolean
 ) {
     this.id = id
@@ -28,7 +24,6 @@ export class Item{
     this.categoryName = categoryName
     this.description = description
     this.image = image
-
     this.favorite = favorite
   }    
 }

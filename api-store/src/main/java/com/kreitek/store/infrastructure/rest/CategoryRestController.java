@@ -1,14 +1,11 @@
 package com.kreitek.store.infrastructure.rest;
 
 import com.kreitek.store.application.dto.CategoryDTO;
-import com.kreitek.store.application.dto.ItemDTO;
 import com.kreitek.store.application.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +21,6 @@ public class CategoryRestController {
     @GetMapping(value = "/categories", produces = "application/json")
     ResponseEntity<List<CategoryDTO>> getAllCategories(@RequestParam(name = "partialName", required = false) String partialName){
         List<CategoryDTO> categories;
-
         if (partialName == null){
             categories = this.categoryService.getAllCategories();
         } else {

@@ -1,5 +1,6 @@
 package com.kreitek.store.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -28,8 +29,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn (name = "item_id")
     )
+    @JsonIgnore // Ignore field during serialization to avoid infinite recursion
     Set<Item> favorites;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore // Ignore field during serialization to avoid infinite recursion
+    private Set<UserItemCart> userItemsCart;
 
     public Long getId() {
         return id;
@@ -94,4 +99,10 @@ public class User {
     public void setFavorites(Set<Item> favorites) {
         this.favorites = favorites;
     }
+
+    public Set<UserItemCart> getUserItemsCart() {
+        return userItemsCart;
+    }
+
+    public void setUserItemsCart(Set<UserItemCart> userItemsCart) { this.userItemsCart = userItemsCart; }
 }

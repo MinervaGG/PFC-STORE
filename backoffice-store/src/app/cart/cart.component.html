@@ -1,0 +1,30 @@
+<h2>{{userNick}} Cart</h2>
+
+<table class="table" > 
+    <thead>
+        <th>Imagen</th>
+        <th>Unidades</th>
+        <th>Nombre item</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let itemCart of itemsInCart">
+            <td> <img class="imgItem" [src]="'data:image/jpeg;base64,/9j/' + itemCart.item.image"></td>
+            <td>{{itemCart.cuantity}}</td>
+            <td> {{itemCart.item.name}} </td>
+            <td> {{itemCart.item.price}} </td>
+            <td>
+                <button id="btnIncreaseQuantity" (click)="increaseQuantity(itemCart)">Incrementar cantidad</button>
+                <button id="btnDecreaseQuantity" (click)="decreaseQuantity(itemCart)">Decrementar cantidad</button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <td>Total precio carrito: {{calculateTotalPrice()}}</td>
+    </tfoot>
+</table>
+
+<div *ngIf="isError" class="alert alert-danger" role="alert">
+    {{alertMessage}}
+</div>

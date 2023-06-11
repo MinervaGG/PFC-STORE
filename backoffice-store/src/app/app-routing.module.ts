@@ -9,6 +9,7 @@ import { CategoryFormComponent } from './entities/category/category-form/categor
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -20,11 +21,9 @@ const routes: Routes = [
   {path: 'categories/:categoryId', component: CategoryFormComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'profile/:userId', component: ProfileComponent}
-  
-
+  {path: 'profile/:userId', component: ProfileComponent},
+  {path: 'cart/:userId', component: CartComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

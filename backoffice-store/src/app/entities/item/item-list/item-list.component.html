@@ -5,28 +5,22 @@
 
     <form>
         <div class="row">
-
             <!-- Name -->
             <div class="form-group" class="col-12 col-md-6">
                 <label for="name">Nombre</label>
                 <input type="text" [(ngModel)]="nameFilter" name="name">
             </div>
-
             <!-- Price -->
             <div class="form-group" class="col-12 col-md-3">
                 <label for="price">Precio máximo</label>
                 <input type="number" [(ngModel)]="priceFilter" name="price">
             </div>
-
             <div class="col-12 col-md-3">
                 <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilters()">Buscar</button>
             </div>
-
         </div>
     </form>
-
 </div>
-
 
 <div id="buttonCreateContainer">
     <button [routerLink]="['/items', 'new']">Nuevo articulo</button>
@@ -53,16 +47,16 @@
             <div *ngIf="userId != undefined">
                 <button id="btnAddFavorite" *ngIf="!item.favorite" (click)="addFavorite(item.id!)">Añadir favorito</button>
                 <button id="btnDeleteFavorite" *ngIf="item.favorite" (click)="deleteFavorite(item.id!)">Quitar favorito</button>
+
+                <button id="btnAddFavorite"  (click)="addItemToCart(item.id!)">Añadir a carrito</button><!--
+                <button id="btnDeleteFavorite" *ngIf="item.inCart" (click)="deleteItemToCart(item.id!)">Quitar de carrito</button>
+                -->
             </div>
                 
             </td>
         </tr>
     </tbody>
 </table>
-<!-- 
-    <button id="btnAddFavorite" *ngIf="!isFavorite" (click)="addFavorite(item.id!)">Favorito</button>
-    <button id="btnDeleteFavorite" *ngIf="!isFavorite" (click)="deleteFavorite(item.id!)">Quitar Favorito</button>
- -->
 <!-- Modal -->
 <div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
     <div class="modal-dialog">

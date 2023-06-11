@@ -1,14 +1,12 @@
 <h1>Ficha de categoria</h1>
 {{mode}} // {{categoryId}}
 
-
 <form *ngIf="category" #categoryForm="ngForm" name="categoryForm" role="form" novalidate autocomplete="off">
     <!-- Id: solo visible si estamos en edicion (pero no sera editable) -->
     <div class="form-group">
         <label for="id">Id</label>
         <input disabled type="number" [(ngModel)]="category.id" name="id" class="form-control" id="price" #price="ngModel">
     </div>
-
     <!-- Name -->
     <div class="form-group">
         <label for="name">Nombre</label>
@@ -23,14 +21,11 @@
             Este campo tiene que tener una longitud minima de 3 caracteres
         </small>        
     </div>    
-
     <!-- Descripcion -->
     <div class="form-group">
         <label for="description">Descripcion</label>
         <input type="text" [(ngModel)]="category.description" name="description" class="form-control" id="description" #description="ngModel" maxlength="2000">
     </div>
-
-
     <!-- Imagen -->
     <div class="form-group">
         <label for="image">Imagen</label>
@@ -38,11 +33,9 @@
         <img [src]="'data:image/jpeg;base64,/9j/' + category.image" alt="imagen">
     </div>
 
-
     <div class="buttonsForm">
         <button (click)="saveCategory()" [disabled]="categoryForm.invalid">Guardar</button>
     </div>
-
 </form>
 
 <div *ngIf="isError" class="alert alert-danger" role="alert">

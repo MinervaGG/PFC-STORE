@@ -9,7 +9,6 @@ export class User{
     password: string;
     favorites?: Item[];
     telephone?: string;
-
   constructor(
     id: number | undefined, 
     nick: string,

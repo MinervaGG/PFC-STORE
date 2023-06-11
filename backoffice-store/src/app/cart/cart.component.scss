@@ -1,0 +1,17 @@
+.imgItem {
+    width: 80px;
+}
+
+table{
+    border: 1px solid black;
+    margin: 0 auto;
+
+    thead{
+        background-color: black;
+        color: white;
+    }
+
+    tr:nth-child(2n){
+        background-color: gainsboro;
+    }
+}
